@@ -6,7 +6,18 @@ def start
   #opand = operator
   #num2 = get_two
   result = @num_1 + @num2
+  puts "Calculating......"
   puts "The result of #{@num_1} #{@operand} #{@num2} is #{@num_1.send(@operand, @num2)}"
+  puts "Continue with this number? y/n"
+  input = gets.strip
+  input.downcase
+  if input == 'y'
+    @num_1 = result
+    puts "\n"
+    operator
+  else
+    num1
+  end
 end
 
 def num1
@@ -56,14 +67,14 @@ def operator
 end
 
 def get_two
-  puts "What is the second number?"
+  puts "What is the next number?"
   @num2 = gets.strip.to_f
   case @num2
   when 0
     puts "********************************************************\nInvalid number, please start again.\n********************************************************"
     get_two
   else
-    puts "#{@num2} is the second number."
+    puts "#{@num2} is the next number."
     start
   end
 end
