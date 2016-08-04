@@ -1,23 +1,33 @@
+x = true
 puts "Welcome to the Ruby Calculator!"
 
+def start
+  #@num_1 = num1
+  #opand = operator
+  #num2 = get_two
+  result = @num_1 + @num2
+  puts "The result of #{@num_1} #{@operand} #{@num2} is #{@num_1.send(@operand, @num2)}"
+end
+
 def num1
+  puts "\n** Enter exit to quit **\n"
   puts "\nWhat is the first number?"
-  puts "Enter Clear to exit\n"
   input1 = gets.strip.downcase
   case input1
-  when "clear"
+  when "exit"
     exit
   else
-    num_1 = input1.to_f
+    @num_1 = input1.to_f
   end
-  case num_1
+  case @num_1
   when 0
-    puts "Invalid number, please try again."
+    puts "*************************************\nInvalid number, please try again.\n*************************************"
     num1
+    # Restart the method  -  if you re-call the method then it still returns a 0 value
   else
-    puts "#{num_1} is the first number."
+    puts "#{@num_1} is the first number."
+    operator
   end
-  return num_1
 end
 
 def operator
@@ -27,43 +37,37 @@ def operator
   if available_ops.include? op_1
     case op_1
     when '+'
-      operand = '+'
+      @operand = '+'
+      get_two
     when '-'
-      operand = '-'
+      @operand = '-'
+      get_two
     when '*'
-      operand = '*'
+      @operand = '*'
+      get_two
     else
-      operand = '/'
+      @operand = '/'
+      get_two
     end
   else
-    puts "Invalid Operator. I only allow + - * /. Please try again"
+    puts "********************************************************\nInvalid Operator. I only allow + - * /. Please try again\n********************************************************"
+    operator
   end
-  return operand
 end
 
 def get_two
   puts "What is the second number?"
-  num2 = gets.strip.to_f
-  case num2
+  @num2 = gets.strip.to_f
+  case @num2
   when 0
-    puts "Invalid number, please try again."
+    puts "********************************************************\nInvalid number, please start again.\n********************************************************"
+    get_two
   else
-    puts "#{num2} is the second number."
+    puts "#{@num2} is the second number."
+    start
   end
-  return num2
 end
 
-def result
-  num_1 = num1
-  opand = operator
-  num2 = get_two
-  result = num_1 + num2
-  puts "The result of #{num_1} #{opand} #{num2} is #{num_1.public_send(opand, num2)}"
+while x == true
   num1
 end
-result
-
-#num_1 = 1
-#operand = "+".to_sym
-#num_2 = 2
-#puts "#{num_1.public_send(operand, num_2)}"
